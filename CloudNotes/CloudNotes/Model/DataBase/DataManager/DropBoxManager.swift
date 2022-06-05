@@ -6,7 +6,12 @@ class DropBoxManager: DataManager {
     private var memoList: [Memo]?
     private let client = DropboxClientsManager.authorizedClient
     
+    init() {
+        self.createFolder()
+    }
+    
     func create(attributes: [String: Any]) {
+        self.upload(target: Memo(title: "제목 없음", body: nil, lastModified: Date(), identifier: UUID()))
     }
     
     func read(index: IndexPath) -> MemoType? {
@@ -59,7 +64,6 @@ class DropBoxManager: DataManager {
     
     private func upload(target: MemoType) {
         // TODO: createFolder 메서드 한 번만 호출하도록 수정 필요
-        createFolder()
         let memo = Memo(title: target.title, body: target.body, lastModified: target.lastModified, identifier: target.identifier)
         guard let data = try? JSONEncoder().encode(memo) else {
             return

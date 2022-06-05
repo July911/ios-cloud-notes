@@ -41,7 +41,7 @@ class NoteDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: circleImage,
             style: .plain,
-            target: nil,
+            target: self,
             action: #selector(tappedShareButton(sender: ))
         )
     }
